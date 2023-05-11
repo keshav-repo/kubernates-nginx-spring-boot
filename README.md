@@ -21,3 +21,16 @@ mysql -u root -h localhost:8080 example -p
 Kill process running on a port
 1. netstat -ano | findstr :<PORT>
 2. taskkill /PID <PID> /F
+
+References: 
+1. https://stackoverflow.com/questions/39632667/how-do-i-kill-the-process-currently-using-a-port-on-localhost-in-windows
+2. 
+
+
+Spring boot rest api
+1. docker build -t employeeapp .
+2. docker run -p 8080:8080 employeeapp
+
+To Run Overall:
+    docker-compose  up
+    

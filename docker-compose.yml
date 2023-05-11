@@ -16,11 +16,31 @@ services:
     ports:
       - "3000:3306"
     networks:
-      - mysqlnet
+      - employee_network
     restart: on-failure    
+  nginx:
+    build:
+      context: ./nginx
+    container_name: nginx
+    hostname: nginx
+    ports:
+        - "80:80" 
+    depends_on:
+        - employeeservice
+    networks:
+        - employee_network
+  employeeservice:
+    build:
+      context: ./rest-service
+    container_name: springbootserver
+    hostname: employeeService
+    ports:
+        - "8080" 
+    networks:
+        - employee_network
 
 volumes:
   mysqldata:
 
 networks:
-  mysqlnet:
+  employee_network:
