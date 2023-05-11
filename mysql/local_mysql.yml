@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql
+    container_name: employee_mysql
+    command: --init-file /data/application/init.sql
+    environment:
+      - MYSQL_ROOT_PASSWORD=password@123
+      - MYSQL_DATABASE=dev
+      - MYSQL_USER=user1
+      - MYSQL_PASSWORD=secret
+    volumes:
+      - ./init.sql:/data/application/init.sql
+      - mysqldata:/var/lib/mysql
+    ports:
+      - "3000:3306"
+    networks:
+      - mysqlnet
+    restart: on-failure    
+
+volumes:
+  mysqldata:
+
+networks:
+  mysqlnet:
