@@ -11,7 +11,7 @@ services:
       - MYSQL_USER=user1
       - MYSQL_PASSWORD=secret
     volumes:
-      - ./init.sql:/data/application/init.sql
+      - ./mysql/init.sql:/data/application/init.sql
       - mysqldata:/var/lib/mysql
     ports:
       - "3000:3306"
