@@ -1,28 +1,39 @@
 package com.learning.resservice;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
-
 @RestController
 @RequestMapping("/api/employee")
 public class EmployeeController {
 
-    private List<Employee> employeeList;
-    public EmployeeController() {
-        employeeList = new ArrayList<>(
-                List.of(
-                        Employee.builder().empId(1).firstName("John").lastName("Doe").build(),
-                        Employee.builder().empId(2).firstName("Richard").lastName("Roe").build(),
-                        Employee.builder().empId(3).firstName("Wilson").lastName("Pickett").build()
-                )
-        );
-    }
+    @Autowired
+    private EmployeeService employeeService;
+
     @GetMapping
     public List<Employee> allEmployees() {
-        return employeeList;
+        return employeeService.allEmployees();
     }
+
+    @GetMapping("/{empId}")
+    public Employee fetchOneEmployee(@PathVariable int empId){
+        return employeeService.fetchEmployee(empId);
+    }
+
+    @PostMapping
+    public Employee saveEmployee(@RequestBody Employee employee){
+        return employeeService.saveEmployee(employee);
+    }
+
+    @PutMapping("/{empId}")
+    public Employee updateEmployee(@RequestBody Employee employee, @PathVariable int empId){
+        return employeeService.saveEmployee(employee);
+    }
+
+    @DeleteMapping("/{empId}")
+    public void deleteEmployee(@PathVariable int empId){
+        employeeService.deleteEmployee(empId);
+    }
+
 }

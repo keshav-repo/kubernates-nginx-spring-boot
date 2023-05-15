@@ -5,6 +5,7 @@ services:
     image: mysql
     container_name: employee_mysql
     command: --init-file /data/application/init.sql
+    hostname: employeedb
     environment:
       - MYSQL_ROOT_PASSWORD=password@123
       - MYSQL_DATABASE=dev
@@ -32,12 +33,14 @@ services:
   employeeservice:
     build:
       context: ./rest-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
     container_name: springbootserver
     hostname: employeeService
-    ports:
-        - "8080" 
     networks:
         - employee_network
+    depends_on:
+      - mysql
 
 volumes:
   mysqldata:

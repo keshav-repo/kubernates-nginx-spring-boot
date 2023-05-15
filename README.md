@@ -22,9 +22,6 @@ Kill process running on a port
 1. netstat -ano | findstr :<PORT>
 2. taskkill /PID <PID> /F
 
-References: 
-1. https://stackoverflow.com/questions/39632667/how-do-i-kill-the-process-currently-using-a-port-on-localhost-in-windows
-2. 
 
 
 Spring boot rest api
@@ -33,4 +30,22 @@ Spring boot rest api
 
 To Run Overall:
     docker-compose  up
-    
+
+
+mysql alone: 
+1. docker build -t my-mysql-image .
+2. docker run --name my-mysql-container -p 3000:3306 my-mysql-image
+
+
+References: 
+1. https://stackoverflow.com/questions/39632667/how-do-i-kill-the-process-currently-using-a-port-on-localhost-in-windows
+2. https://spring.io/guides/topicals/spring-boot-docker/
+3. 
+
+Skip test file 
+mvn install -DskipTests
+
+Pass a specific profile in spring boot app: 
+    -Dspring.profiles.active=local
+
+
